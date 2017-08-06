@@ -1,0 +1,38 @@
+1.	What’s stdint.h?
+	A header file that allows you to access new integer types with fixed widths. 
+
+2.	What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+	These are all integer data types with a fixed width. The size of a standard data type can vary between systems. Fixing the width, or data size, allows your program to work universally across systems.  
+	
+3.	How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+	BYTE	=	8 Bits
+	DWORD	=	32 Bits 
+	LONG	=	32 Bits
+	WORD	=	16 Bits
+	
+4.	What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file formats (with high probability) are generally called "magic numbers."
+	The first two bytes of a BMP file must denote the file type which is 0x42 0x4D in hexadecimal or BM in ASCII.
+	
+5.	What’s the difference between bfSize and biSize?
+	bfSize is within BITMAPFILEHEADER and is the size of the entire bitmap file in bytes. biSize is within BITMAPINFOHEADER and is the size of the structure in bytes.
+	
+6.	What does it mean if biHeight is negative?
+	It means the bitmap image is top-down and it's memory origin is in the upper left corner. 
+	
+7.	What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+	biBitCount.
+	
+8.	Why might fopen return NULL in lines 24 and 32 of copy.c?
+	If the input file does not exist or if there isn't enough memory. 
+	
+9.	Why is the third argument to fread always 1 in our code?
+	The third arguement denotes the number of elements fread() will read at the specified size. In this case it is always 1 because we want to read 1 file. 
+	
+10.	What value does line 65 of copy.c assign to padding if bi.biWidth is 3?
+	Value of 3. This is because a width of 3 results in 9 bytes (3 pixels * 3 bytes per pixel) which is not a multiple of 4. In this case 3 bytes worth of 0s are needed to get to a total of 12 bytes, which is a multiple of 4. 
+	
+11.	What does fseek do?
+	Allows you to change the offset of the file pointer. 
+	
+12.	What is SEEK_CUR?
+	Moves file pointer position to the specified location. 
