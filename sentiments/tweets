@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+
+#Import parameters for system, operating system, and helpers.py
+import sys
+import os
+import helpers
+
+from analyzer import Analyzer
+from termcolor import colored
+
+# TODO
+def main():
+
+    #Ensure proper usage
+    if len(sys.argv) != 2:
+        sys.exit("Usage: ./tweet @username")
+    
+    #Retrieve 50 tweets for user 
+    tweets = helpers.get_user_timeline(sys.argv[1], 50)
+    
+    #Error message if user tweets could not be retrieved
+    if tweets == None:
+        sys.exit("User is private or does not exist")
+    
+    #Absolute paths to lists
+    positives = os.path.join(sys.path[0], "positive-words.txt")
+    negatives = os.path.join(sys.path[0], "negative-words.txt")
+        
+    #Instantiate analyzer
+    analyzer = Analyzer(positives, negatives)
+    
+    #Analyze all retrieved tweets
+    for tweet in tweets:
+        score = analyzer.analyze(tweet)
+        if score > 0.0:
+            print(colored("{} {}".format(score, tweet), "green"))
+        elif score < 0.0:
+            print(colored("{} {}".format(score, tweet), "red"))
+        else:
+            print(colored("{} {}".format(score, tweet), "yellow"))
+    
+if __name__ == "__main__":
+    main()
